@@ -5,6 +5,8 @@ from src.Logger import logging
 from sklearn.model_selection import train_test_split
 from src.Exception import CustomException
 from dataclasses import dataclass
+from src.components.Data_Processing import Data_Ingestion
+from src.components.Model_training import Model_Training
 
 
 @dataclass
@@ -57,3 +59,15 @@ if __name__ == "__main__":
     train_data_path, test_data_path = data_ingest_obj.initialize_data_ingestion(
         "notebook/dataset.csv"
     )
+
+    data_processing_obj = Data_Ingestion()
+    X_train, y_train, X_test, y_test = data_processing_obj.initialize_data_processing(
+        train_data_path, test_data_path
+    )
+    print("Xtrain is", X_train)
+
+    model_training_obj = Model_Training()
+    # r2_Score = model_training_obj.initialize_model_training(
+    #     X_train, y_train, X_test, y_test
+    # )
+    # print("Model R2 Score is ", r2_Score)
